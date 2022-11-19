@@ -1,15 +1,17 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+const URI = process.env.MONGODB;
 
-const uri = process.env.MONGODB;
+const connectDatabase = async () => {
+    try {
+        await mongoose.connect(URI, {
+            useNewUrlParser: true,
+        });
 
-const client = new MongoClient(uri);
+        console.log('Mongo DB connected');
+    } catch (error) {
+        console.error(error.message);
+        process.exit(1);
+    }
+};
 
-async function handleDatabase() {
-    await client.connect();
-    console.log('Success');
-    const db = client.db('App');
-    const users = db.collection('users');
-    return 'Connected DB';
-}
-
-module.exports = { handleDatabase };
+module.exports = connectDatabase;

@@ -3,13 +3,13 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const controller = require('./controller');
-const { handleDatabase } = require('./config/mongoDB');
+const connectDatabase = require('./config/mongoDB');
 
 const PORT = process.env.PORT;
 
 const app = express();
 
-handleDatabase();
+connectDatabase();
 
 app.use(
     cors({
@@ -18,7 +18,7 @@ app.use(
 );
 
 app.use(express.json());
-app.use('/', controller);
+app.use('/api', controller);
 
 app.get('/', (req, res) => {
     res.send('database');
