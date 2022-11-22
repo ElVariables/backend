@@ -1,5 +1,5 @@
 const express = require('express');
-const noteModel = require('../Schema/note');
+const noteModel = require('../Schema/noteType');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -29,9 +29,10 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { task, title, desc } = req.body;
+
     if (!task || !title || !desc) {
-        return res.json({
-            msg: 'Missing fields',
+        return res.status(401).json({
+            msg: 'Missing Fields',
         });
     }
 
@@ -42,9 +43,9 @@ router.post('/', async (req, res) => {
     });
 
     const note = await newNote.save();
-    res.status(201).json({
+    return res.status(201).json({
         data: note,
-        msg: 'Successfully',
+        msg: 'Add Successfully',
     });
 });
 

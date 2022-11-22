@@ -1,11 +1,11 @@
 const express = require('express');
 
-const handleLogin = require('./handleLogin.js');
-const note = require('./note.js');
+const Auth = require('./Auth.js');
+const Note = require('./Note.js');
 
 const router = express.Router();
 
-router.use('/login', handleLogin);
-router.use('/note', note);
+router.use('/auth', Auth);
+router.use('/note', Note);
 
 module.exports = router;

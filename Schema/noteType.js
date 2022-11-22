@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const noteSchema = mongoose.Schema({
-    // author: {
-    //     type: String,
-    //     require: true,
-    //     select: false,
-    // },
     task: {
         type: String,
         require: true,
